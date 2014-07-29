@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "dependencies" : {
         "node-sass": "0.9.3",
-        "enb": "0.13.4"
+        "enb": "0.13.4",
+        "colors": "0.6.2",
+        "vow": "0.4.5"
     },
     "engines": {
         "node": ">=0.10"
