@@ -1,0 +1,12 @@
+{
+    "name": "enb-sass",
+    "version": "0.0.1",
+    "dependencies" : {
+        "node-sass": "0.9.3",
+        "enb": "0.13.4"
+    },
+    "engines": {
+        "node": ">=0.10"
+    }
+}
+
