@@ -26,8 +26,6 @@ module.exports = require('enb/techs/css').buildFlow()
             includePaths: []
         };
 
-        console.log(sourceFiles);
-
         if (this._prependedFiles) {
             sourceFiles = this._prependedFiles.concat(sourceFiles);
         }
