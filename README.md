@@ -1,7 +1,8 @@
 enb-sass
 ========
 
-SASS tech for ENB
+Предоставляет технологию `sass` для сборщика ENB (https://github.com/enb-make).
+Советую внимательно ознакомьться с README репозитория `node-sass` (https://github.com/sass/node-sass), чтобы понять детали работы технологии.
 
 
 Установка
@@ -19,8 +20,30 @@ SASS tech for ENB
 npm install
 ```
 
-В коде:
 
-```
-[require('enb-sass/enb-sass'), {target: '?.source.css'}]
+Параметры
+=========
+
+      String  target          Маска файла, в который будут слиты результаты преобразований.               [default: ?.css]
+      Array   sourceSuffixes  Массив расширений файлов, которые будут обрабатываться.                     [default: ['css', 'scss']]
+      Array   prependedFiles  Массив файлов, который подставляется в начало списка. Например reset.css.   [default: []]
+      Object  sassSettings    Пробрасываются все настройки node-sass.
+                              Подробнее тут https://github.com/sass/node-sass#options
+
+
+Пример использования
+====================
+
+```javascript
+nodeConfig.addTech([
+  require('enb-sass'), {
+    target: '?.source.css',
+    sourceSuffixes: ['css', 'scss', 'sass'],
+    prependedFiles: ['reset.css'],
+    sassSettings: {
+      outputStyle: 'compressed',
+      debug: true
+    }
+  }
+]);
 ```

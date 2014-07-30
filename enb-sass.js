@@ -46,8 +46,12 @@ module.exports = require('enb/techs/css').buildFlow()
                     settings.includePaths.push(fileDir);
                 }
 
-                var fileContent = fs.readFileSync(file.fullname, {'encoding': 'utf-8'});
-                return that._processUrls(fileContent, file.fullname)
+                return that._processUrls(
+                    fs.readFileSync(file.fullname, {
+                        encoding: 'utf-8'
+                    }),
+                    file.fullname
+                )
             }).join('\n');
 
         settings.success = function (cssResult) {
@@ -60,7 +64,6 @@ module.exports = require('enb/techs/css').buildFlow()
         };
 
         sass.render(settings);
-        return deferred.promise();
     })
     .methods({
         _processUrls: function (data, filename) {
