@@ -18,3 +18,9 @@ SASS tech for ENB
 ```
 npm install
 ```
+
+В коде:
+
+```
+[require('enb-sass/enb-sass'), {target: '?.source.css'}]
+```
