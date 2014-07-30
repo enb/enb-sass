@@ -17,13 +17,6 @@ colors.setTheme({
     error: 'red'
 });
 
-
-/**
- * Collect all scss files and compile them
- * @require node-sass https://github.com/andrew/node-sass
- * @author Viacheslav Glushko mail@ixax.me
- * @type {Tech}
- */
 module.exports = require('enb/techs/css').buildFlow()
     .name('css-sass')
     .defineOption('prependedFiles')
