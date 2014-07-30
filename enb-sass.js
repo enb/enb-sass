@@ -1,31 +1,32 @@
 var path = require('path');
-var sass = require('node-sass');
 var colors = require('colors');
 var Vow = require('vow');
 var fs = require('fs');
 
+var sass;
+try {
+    sass = require('node-sass');
+} catch (e) {
+    throw new Error('The technology "enb-sass" requires `npm module "node-sass"`');
+}
+
 colors.setTheme({
-    silly: 'rainbow',
-    input: 'grey',
-    verbose: 'cyan',
-    prompt: 'grey',
-    info: 'green',
-    data: 'grey',
-    help: 'cyan',
-    warn: 'yellow',
     debug: 'blue',
     error: 'red'
 });
 
 module.exports = require('enb/techs/css').buildFlow()
-    .name('css-sass')
+    .name('enb-sass')
     .defineOption('prependedFiles')
-    .useFileList(['css', 'scss'])
-    .target('target', '?.css')
+    .defineOption('sourceSuffixes')
+    .defineOption('target')
+    .defineOption('sassSettings')
+    .useFileList(this._sourceSuffixes || ['css', 'scss'])
+    .target('target', this._target || '?.css')
     .builder(function (sourceFiles) {
-        var _this = this;
+        var that = this;
         var deferred = Vow.defer();
-        var settings = {
+        var settings = this._sassSettings || {
             outputStyle: 'normal',
             sourceComments: 'none',
             includePaths: []
@@ -35,7 +36,7 @@ module.exports = require('enb/techs/css').buildFlow()
             sourceFiles = this._prependedFiles.concat(sourceFiles);
         }
 
-        var cssSource = sourceFiles
+        settings.data = sourceFiles
             .filter(function (file) {
                 return path.basename(file.name).indexOf('_') !== 0;
             })
@@ -46,22 +47,16 @@ module.exports = require('enb/techs/css').buildFlow()
                 }
 
                 var fileContent = fs.readFileSync(file.fullname, {'encoding': 'utf-8'});
-                fileContent = _this._processUrls(fileContent, file.fullname)
-                return [
-                        '/* ' + file.fullname + ' start */',
-                    fileContent,
-                        '/* ' + file.fullname + ' end */'
-                ].join('\n');
+                return that._processUrls(fileContent, file.fullname)
             }).join('\n');
 
-
-        settings.data = cssSource;
         settings.success = function (cssResult) {
             deferred.resolve(cssResult);
         };
+
         settings.error = function (err) {
             console.log('SASS failed:'.error, err.debug);
-            deferred.reject('');
+            deferred.reject(err);
         };
 
         sass.render(settings);
