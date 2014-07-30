@@ -29,7 +29,7 @@ npm install
     Array   sourceSuffixes  Массив расширений файлов, которые будут обрабатываться.          [default: ['css', 'scss']]
     Array   prependedFiles  Массив файлов, который подставляется в начало списка.            [default: []]
                             Например reset.css.
-    Object  sassSettings    Пробрасываются все настройки node-sass.                          [default: {outputStyle: 'normal', includePaths: []}]
+    Object  sassSettings    Пробрасываются все настройки node-sass.                          [default: {outputStyle: 'normal', sourceComments: 'normal'}]
                             Подробнее тут https://github.com/sass/node-sass#options
 
 

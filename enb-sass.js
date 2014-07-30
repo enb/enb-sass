@@ -23,8 +23,7 @@ module.exports = require('enb/techs/css').buildFlow()
         var settings = this._sassSettings || {
             outputStyle: 'normal',
             // It can break build process if `none`
-            sourceComments: 'normal',
-            includePaths: []
+            sourceComments: 'normal'
         };
 
         if (this._prependedFiles) {
