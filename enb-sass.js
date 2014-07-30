@@ -1,14 +1,8 @@
-var path = require('path');
-var colors = require('colors');
+var sass = require('node-sass');
 var Vow = require('vow');
+var colors = require('colors');
+var path = require('path');
 var fs = require('fs');
-
-var sass;
-try {
-    sass = require('node-sass');
-} catch (e) {
-    throw new Error('The technology "enb-sass" requires `npm module "node-sass"`');
-}
 
 colors.setTheme({
     debug: 'blue',
@@ -28,8 +22,11 @@ module.exports = require('enb/techs/css').buildFlow()
         var deferred = Vow.defer();
         var settings = this._sassSettings || {
             outputStyle: 'normal',
+            sourceComments: 'none',
             includePaths: []
         };
+
+        console.log(sourceFiles);
 
         if (this._prependedFiles) {
             sourceFiles = this._prependedFiles.concat(sourceFiles);
@@ -59,10 +56,11 @@ module.exports = require('enb/techs/css').buildFlow()
 
         settings.error = function (err) {
             console.log('SASS failed:'.error, err.debug);
-            deferred.reject(err);
+            deferred.reject(err.debug);
         };
 
         sass.render(settings);
+        return deferred.promise();
     })
     .methods({
         _processUrls: function (data, filename) {
