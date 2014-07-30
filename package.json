@@ -1,9 +1,9 @@
 {
-    "author": "Viacheslav Glushko <mail@ixax.ru",
+    "author": "Viacheslav Glushko <ixax@yandex-team.ru",
     "description": "ENB SASS tech",
     "name": "enb-sass",
     "version": "0.1.1",
-    "repository": "https://github.com/ixax/enb-sass",
+    "repository": "https://github.yandex-team.ru/ixax/enb-sass",
     "dependencies" : {
         "node-sass": "0.9.3",
         "enb": "0.13.4",
