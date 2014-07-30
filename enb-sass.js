@@ -22,7 +22,8 @@ module.exports = require('enb/techs/css').buildFlow()
         var deferred = Vow.defer();
         var settings = this._sassSettings || {
             outputStyle: 'normal',
-            sourceComments: 'none',
+            // It can break build process if `none`
+            sourceComments: 'normal',
             includePaths: []
         };
 
