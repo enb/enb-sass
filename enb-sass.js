@@ -28,7 +28,6 @@ module.exports = require('enb/techs/css').buildFlow()
         var deferred = Vow.defer();
         var settings = this._sassSettings || {
             outputStyle: 'normal',
-            sourceComments: 'none',
             includePaths: []
         };
 
