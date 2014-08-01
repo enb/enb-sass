@@ -18,19 +18,17 @@ enb-sass
 Устанавливаем командой:
 
 ```
-npm install
+npm install --registry=http://npm.yandex-team.ru/
 ```
 
 
 Параметры
 =========
 
-    String  target          Маска файла, в который будут слиты результаты преобразований.    [default: '?.css']
-    Array   sourceSuffixes  Массив расширений файлов, которые будут обрабатываться.          [default: ['css', 'scss']]
-    Array   prependedFiles  Массив файлов, который подставляется в начало списка.            [default: []]
-                            Например reset.css.
-    Object  sassSettings    Пробрасываются все настройки node-sass.                          [default: {outputStyle: 'normal', sourceComments: 'normal'}]
-                            Подробнее тут https://github.com/sass/node-sass#options
+    String  target      Маска файла, в который будут слиты результаты преобразований.    [default: '?.css']
+                        Например reset.css.
+    Object  sass        Пробрасываются все настройки node-sass.                          [default: {outputStyle: 'normal', sourceComments: 'normal'}]
+                        Подробнее тут https://github.com/sass/node-sass#options
 
 
 Пример использования
