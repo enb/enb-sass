@@ -5,7 +5,7 @@
     "version": "0.2",
     "repository": "https://github.yandex-team.ru/ixax/enb-sass",
     "dependencies" : {
-        "node-sass": "0.9.3",
+        "node-sass": "1.1.4",
         "enb": "0.13.4",
         "vow": "0.4.5"
     },
