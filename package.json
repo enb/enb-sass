@@ -2,12 +2,12 @@
     "author": "Viacheslav Glushko <ixax@yandex-team.ru",
     "description": "ENB SASS tech",
     "name": "enb-sass",
-    "version": "0.1.0",
+    "version": "0.4.0",
     "repository": "https://github.yandex-team.ru/ixax/enb-sass",
     "dependencies" : {
-        "node-sass": "1.2.3",
-        "enb": "0.13.4",
-        "vow": "0.4.5"
+        "node-sass": "2.1.1",
+        "enb": "0.15.0",
+        "vow": "0.4.9"
     },
     "engines": {
         "node": ">=0.10"

@@ -37,7 +37,7 @@ npm install --registry=http://npm.yandex-team.ru/
 ```javascript
 nodeConfig.addTech([
   require('enb-sass'), {
-    target: '?.source.css',
+    target: '?.css',
     sassSettings: {
       outputStyle: 'compressed',
       debug: true
