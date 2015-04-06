@@ -1,6 +1,8 @@
 enb-sass
 ========
 
+[![node-sass supports version](https://img.shields.io/badge/node--sass-2.0.0-orange.svg)](https://github.com/sass/node-sass/tree/v2) [![Build Status](https://travis-ci.org/ixax/enb-sass.svg?branch=master)](https://travis-ci.org/ixax/enb-sass) [![Dependency Status](http://img.shields.io/david/ixax/enb-sass.svg?style=flat)](https://david-dm.org/ixax/enb-sass)
+
 Предоставляет технологию `sass` для сборщика ENB (https://github.com/enb-make).
 
 Советую внимательно ознакомьться с README репозитория `node-sass` (https://github.com/sass/node-sass), чтобы понять детали работы технологии.
