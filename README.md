@@ -1,49 +1,79 @@
-enb-sass
-========
+# [enb](https://github.com/enb-make/enb)-sass [![node-sass supports version](https://img.shields.io/badge/node--sass-2.1.1-orange.svg)](https://github.com/sass/node-sass/tree/v2) [![Build Status](https://travis-ci.org/ixax/enb-sass.svg?branch=master)](https://travis-ci.org/ixax/enb-sass) [![Dependency Status](http://img.shields.io/david/ixax/enb-sass.svg?style=flat)](https://david-dm.org/ixax/enb-sass)
 
-[![node-sass supports version](https://img.shields.io/badge/node--sass-2.0.0-orange.svg)](https://github.com/sass/node-sass/tree/v2) [![Build Status](https://travis-ci.org/ixax/enb-sass.svg?branch=master)](https://travis-ci.org/ixax/enb-sass) [![Dependency Status](http://img.shields.io/david/ixax/enb-sass.svg?style=flat)](https://david-dm.org/ixax/enb-sass)
-
-Предоставляет технологию `sass` для сборщика ENB (https://github.com/enb-make).
-
-Советую внимательно ознакомьться с README репозитория `node-sass` (https://github.com/sass/node-sass), чтобы понять детали работы технологии.
+Provides the `node-sass` features for projects builder `enb` (https://github.com/enb-make/enb).
 
 
-Установка
-=========
+## Installing
 
-Прописываем зависимость в `dependencies` package.json проекта:
+```
+npm install enb-sass --save
+```
+
+
+## Options
+
+* *String* **target** result target file. Default: `?.css`
+* *String* **filesTarget** — files target, from which to obtain a list of source files. Default: `?.files`.
+* *Array* **sourceSuffixes** Files suffixes to use. Default: `css`
+* *Object* **sass** `node-sass` options. Read more: https://github.com/sass/node-sass#options. Default: default `node-sass` options.
+
+
+## Usage
+
+#### The default use
 
 ```javascript
-"enb-sass": "git@github.yandex-team.ru:ixax/enb-sass.git#master"
+nodeConfig.addTech([
+  require('enb-sass')
+]);
 ```
 
-Устанавливаем командой:
-
-```
-npm install --registry=http://npm.yandex-team.ru/
-```
-
-
-Параметры
-=========
-
-    String  target      Маска файла, в который будут слиты результаты преобразований.    [default: '?.css']
-                        Например reset.css.
-    Object  sass        Пробрасываются все настройки node-sass.                          [default: {outputStyle: 'normal', sourceComments: 'normal'}]
-                        Подробнее тут https://github.com/sass/node-sass#options
-
-
-Пример использования
-====================
+#### Collect only scss files
 
 ```javascript
 nodeConfig.addTech([
   require('enb-sass'), {
     target: '?.css',
-    sassSettings: {
+    sourceSuffixes: ['scss']
+  }
+]);
+```
+
+#### Use `node-sass` [compression](https://github.com/sass/node-sass#outputstyle) and [debug mode](https://github.com/sass/node-sass#sourcecomments)
+
+```javascript
+nodeConfig.addTech([
+  require('enb-sass'), {
+    target: '?.css',
+    sourceSuffixes: ['scss'], {
       outputStyle: 'compressed',
-      debug: true
+      sourceComments: true
     }
   }
 ]);
 ```
+
+#### Build ie and ie8 css/scss files with `node-sass` [compression](https://github.com/sass/node-sass#outputstyle) and [debug mode](https://github.com/sass/node-sass#sourcecomments)
+
+```javascript
+nodeConfig.addTech([
+  require('enb-sass'), {
+    target: '?.css',
+    sourceSuffixes: ['css', 'scss', 'ie.css', 'ie.scss', 'ie8.css', 'ie8.scss'], {
+      outputStyle: 'compressed',
+      sourceComments: true
+    }
+  }
+]);
+```
+
+
+## Used in
+* Yandex TV https://tv.yandex.ru/
+* Kinopoisk https://kinopoisk.ru/
+
+
+## Thanks
+
+* Abramov Andrew ([@blond](https://github.com/blond)). For the support and correct answers.
+* Filatov Dmitry ([@dfilatov](https://github.com/dfilatov)). For `vow`, `vow-fs`, `inherit`.
