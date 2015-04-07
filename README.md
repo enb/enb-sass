@@ -13,7 +13,7 @@ npm install enb-sass --save
 ## Options
 
 * *String* **target** contains target file name. Default: `?.css`
-* *String* **filesTarget** — contains file masks, regarding which a list of source files is created. Default: `?.files`.
+* *String* **filesTarget** — contains file masks, according to which a list of source files is created. Default: `?.files`.
 * *Array* **sourceSuffixes** Files suffixes that will be used. Default: `css`
 * *Object* **sass** `node-sass` options. Read more: https://github.com/sass/node-sass#options. Default: default `node-sass` options.
 
