@@ -1,6 +1,6 @@
 {
     "name": "enb-sass",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "enb sass tech",
     "keywords": [
         "enb",
@@ -8,23 +8,23 @@
         "scss",
         "css"
     ],
-    "author": "Viacheslav Glushko <ixax@yandex-team.ru>",
+    "author": "Viacheslav Glushko <mail@ixax.me>",
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/ixax/enb-sass/blob/master/LICENSE"
+            "url": "https://github.com/enb-make/enb-sass/blob/master/LICENSE"
         }
     ],
     "repository": {
         "type": "git",
-        "url": "git@github.com:ixax/enb-sass.git"
+        "url": "git@github.com:enb-make/enb-sass.git"
     },
-    "homepage": "https://github.com/ixax/enb-sass",
-    "bugs": "https://github.com/ixax/enb-sass/issues",
+    "homepage": "https://github.com/enb-make/enb-sass",
+    "bugs": "https://github.com/enb-make/enb-sass/issues",
     "maintainers": [
         {
             "name": "Viacheslav Glushko",
-            "email": "ixax@yandex-team.ru",
+            "email": "mail@ixax.me",
             "github-username": "ixax"
         }
     ],
