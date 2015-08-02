@@ -53,9 +53,12 @@ module.exports = require('enb/lib/build-flow').create()
                     successCb(cssResult);
                     deferred.resolve(cssResult);
                 } catch (err) {
-                    err = JSON.parse(err);
-                    err.formatted = util.format('%s in %s:%d:%d', err.message, err.file, err.line, err.column);
+                    err = typeof Error ? err : JSON.parse(err);
+                    err.formatted = err.file
+                        ? util.format('%s in %s:%d:%d', err.message, err.file, err.line, err.column)
+                        : err.message;
                     errorCb(err);
+                    console.error(err.formatted);
                     deferred.reject(err.formatted);
                 }
             }.bind(this))
