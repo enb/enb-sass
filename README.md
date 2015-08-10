@@ -1,4 +1,4 @@
-# [enb](https://github.com/enb-make/enb)-sass [![npm version](https://img.shields.io/badge/npm-v1.0.1-blue.svg)](https://www.npmjs.com/package/enb-sass) [![node-sass supports version](https://img.shields.io/badge/node--sass-2.1.1-orange.svg)](https://github.com/sass/node-sass/tree/v2) [![Build Status](https://travis-ci.org/enb-make/enb-sass.svg?branch=master)](https://travis-ci.org/enb-make/enb-sass) [![Dependency Status](https://david-dm.org/enb-make/enb-sass.svg)](https://david-dm.org/enb-make/enb-sass)
+# [enb](https://github.com/enb-make/enb)-sass [![npm version](https://img.shields.io/badge/npm-v1.0.1-blue.svg)](https://www.npmjs.com/package/enb-sass) [![node-sass supports version](https://img.shields.io/badge/node--sass-3.2.0-orange.svg)](https://github.com/sass/node-sass/tree/v2) [![Build Status](https://travis-ci.org/enb-make/enb-sass.svg?branch=master)](https://travis-ci.org/enb-make/enb-sass) [![Dependency Status](https://david-dm.org/enb-make/enb-sass.svg)](https://david-dm.org/enb-make/enb-sass)
 
 Provides the `node-sass` features for project-builder `enb` (https://github.com/enb-make/enb).
 
