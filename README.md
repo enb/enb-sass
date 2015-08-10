@@ -43,9 +43,12 @@ nodeConfig.addTech([
 
 ```javascript
 nodeConfig.addTech([
-  require('enb-sass'), {
+  require('enb-sass'), 
+  {
     target: '?.css',
-    sourceSuffixes: ['scss'], {
+    sourceSuffixes: ['scss'],
+    sass:
+    {
       outputStyle: 'compressed',
       sourceComments: true
     }
@@ -57,9 +60,12 @@ nodeConfig.addTech([
 
 ```javascript
 nodeConfig.addTech([
-  require('enb-sass'), {
+  require('enb-sass'), 
+  {
     target: '?.css',
-    sourceSuffixes: ['css', 'scss', 'ie.css', 'ie.scss', 'ie8.css', 'ie8.scss'], {
+    sourceSuffixes: ['css', 'scss', 'ie.css', 'ie.scss', 'ie8.css', 'ie8.scss'],
+    sass:
+    {
       outputStyle: 'compressed',
       sourceComments: true
     }
