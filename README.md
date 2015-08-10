@@ -47,8 +47,7 @@ nodeConfig.addTech([
   {
     target: '?.css',
     sourceSuffixes: ['scss'],
-    sass:
-    {
+    sass: {
       outputStyle: 'compressed',
       sourceComments: true
     }
@@ -64,8 +63,7 @@ nodeConfig.addTech([
   {
     target: '?.css',
     sourceSuffixes: ['css', 'scss', 'ie.css', 'ie.scss', 'ie8.css', 'ie8.scss'],
-    sass:
-    {
+    sass: {
       outputStyle: 'compressed',
       sourceComments: true
     }
