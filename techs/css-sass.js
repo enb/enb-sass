@@ -41,8 +41,6 @@ module.exports = require('enb/lib/build-flow').create()
 
         Vow.all(promises)
             .then(function () {
-
-
                 // Collect the contents of all files into one big string
                 sassSettings.data += Array.prototype.slice.call(arguments[0], 0).join("\n");
 
@@ -54,9 +52,7 @@ module.exports = require('enb/lib/build-flow').create()
                     successCb(cssResult);
                     deferred.resolve(cssResult);
                 } catch (err) {
-                    if (typeof err === 'string') {
-                        err = JSON.parse(err);
-                    }
+                    err = typeof Error ? err : JSON.parse(err);
                     var lines = sassSettings.data.split('\n');
                     var ctx = lines.slice(err.line - 20, err.line).concat(
                         '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
