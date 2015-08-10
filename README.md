@@ -77,3 +77,4 @@ nodeConfig.addTech([
 
 * Abramov Andrew ([@blond](https://github.com/blond)). For the support and correct answers.
 * Filatov Dmitry ([@dfilatov](https://github.com/dfilatov)). For `vow`, `vow-fs`, `inherit`.
+* Georgy Krasulya ([@gkrasulya](https://github.com/gkrasulya)). For `rich error reporting`.
