@@ -78,7 +78,7 @@ module.exports = require('enb/lib/build-flow').create()
 
                     formattedError = util.format(
                         'File:%s\nMessage: %s\nContext:\n%s',
-                        filename[1] + ':' + ex.line,
+                        filename[1] + ':' + (ex.line - i - 2),
                         ex.message,
                         errorCtx
                     );
