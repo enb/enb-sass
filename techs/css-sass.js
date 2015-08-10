@@ -9,7 +9,7 @@ var util = require('util');
 module.exports = require('enb/lib/build-flow').create()
     .name('enb-sass')
     .target('target', '?.css')
-    .defineOption('sass', {}) // https://github.com/sass/node-sass/blob/v2.1.1/README.md#options
+    .defineOption('sass', {}) // https://github.com/sass/node-sass#options
     .useFileList(['css', 'scss'])
     .builder(function (sourceFiles) {
         var _this = this;
@@ -18,6 +18,10 @@ module.exports = require('enb/lib/build-flow').create()
             includePaths: [],
             data: ''
         }, this._sass);
+        var errorLogging = {
+            enabled: true,
+            offsetLines: 5
+        };
 
         // Prevent user mistakes
         sassSettings.includePaths = sassSettings.includePaths instanceof Array ? sassSettings.includePaths : [];
@@ -51,20 +55,44 @@ module.exports = require('enb/lib/build-flow').create()
                     var cssResult = sass.renderSync(sassSettings).css;
                     successCb(cssResult);
                     deferred.resolve(cssResult);
-                } catch (err) {
-                    err = typeof Error ? err : JSON.parse(err);
-                    var lines = sassSettings.data.split('\n');
-                    var ctx = lines.slice(err.line - 20, err.line).concat(
-                        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
-                        lines.slice(err.line + 1, err.line + 20)
-                    ).join('\n');
+                } catch (ex) {
+                    ex = ex instanceof Error ? ex : JSON.parse(ex);
 
-                    var formatted = util.format('%s\n\n%s', err.message, ctx);
-                    throw new Error(formatted);
+                    var lines = sassSettings.data.split('\n');
+                    var errorCtx = lines.slice(ex.line - errorLogging.offsetLines, ex.line).concat(
+                        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
+                        lines.slice(ex.line + 1, ex.line + errorLogging.offsetLines + 1)
+                    ).join('\n');
+                    var formattedError;
+
+                    // Finding filename
+                    var i = ex.line;
+                    var filename;
+                    var searchString = ': begin */';
+                    while (!filename) {
+                        if (lines[i].indexOf(searchString, lines[i] - searchString.length) !== -1) {
+                            filename = lines[i].match(/^\/\*\s+(.*):\s+begin\s+\*\/$/);
+                        }
+                        i--;
+                    }
+
+                    formattedError = util.format(
+                        'File:%s\nMessage: %s\nContext:\n%s',
+                        filename[1] + ':' + ex.line,
+                        ex.message,
+                        errorCtx
+                    );
+
+                    if (errorLogging.enabled) {
+                        console.error(formattedError);
+                    }
+
+                    deferred.reject(formattedError);
                 }
             }.bind(this))
-            .fail(function (err) {
-                deferred.reject(err);
+            .fail(function (ex) {
+                ex = err instanceof Error ? ex : JSON.parse(ex);
+                deferred.reject(ex);
             });
 
         return deferred.promise();
@@ -117,4 +145,3 @@ module.exports = require('enb/lib/build-flow').create()
         }
     })
     .createTech();
-
