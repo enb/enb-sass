@@ -41,11 +41,12 @@ module.exports = require('enb/lib/build-flow').create()
 
         Vow.all(promises)
             .then(function () {
+
+
                 // Collect the contents of all files into one big string
                 sassSettings.data += Array.prototype.slice.call(arguments[0], 0).join("\n");
 
                 var successCb = sassSettings.success instanceof Function ? sassSettings.success : function () {};
-                var errorCb = sassSettings.error instanceof Function ? sassSettings.error : function () {};
 
                 // In some cases `renderSync` does not give the data in the handler, so we use a try...catch
                 try {
@@ -53,10 +54,17 @@ module.exports = require('enb/lib/build-flow').create()
                     successCb(cssResult);
                     deferred.resolve(cssResult);
                 } catch (err) {
-                    err = JSON.parse(err);
-                    err.formatted = util.format('%s in %s:%d:%d', err.message, err.file, err.line, err.column);
-                    errorCb(err);
-                    deferred.reject(err.formatted);
+                    if (typeof err === 'string') {
+                        err = JSON.parse(err);
+                    }
+                    var lines = sassSettings.data.split('\n');
+                    var ctx = lines.slice(err.line - 20, err.line).concat(
+                        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
+                        lines.slice(err.line + 1, err.line + 20)
+                    ).join('\n');
+
+                    var formatted = util.format('%s\n\n%s', err.message, ctx);
+                    throw new Error(formatted);
                 }
             }.bind(this))
             .fail(function (err) {
@@ -113,3 +121,4 @@ module.exports = require('enb/lib/build-flow').create()
         }
     })
     .createTech();
+
