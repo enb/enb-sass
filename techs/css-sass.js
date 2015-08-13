@@ -38,8 +38,9 @@ module.exports = require('enb/lib/build-flow').create()
             return vowFs.read(filename, 'utf8')
                 .then(function (data) {
                     data = _this._processUrls(data, filename);
+                    data = _this._resolveImports(data, filename);
 
-                    return _this._processIncludes(data, filename);
+                    return data;
                 });
         });
 
@@ -98,10 +99,22 @@ module.exports = require('enb/lib/build-flow').create()
         return deferred.promise();
     })
     .methods({
+        /**
+         * Resolve static files urls
+         * @param {String} data sass code
+         * @param {String} filename current file path
+         * @return {String}
+         */
         _processUrls: function (data, filename) {
             return this._getCssPreprocessor()._processUrls(data, filename);
         },
 
+        /**
+         * Resolve imported files and include it's content
+         * @param {String} data sass code
+         * @param {String} filename current file path
+         * @return {String}
+         */
         _processIncludes: function (data, filename) {
             var fileRelativeUrl = this._resolveCssUrl(filename, filename);
 
@@ -114,10 +127,44 @@ module.exports = require('enb/lib/build-flow').create()
             });
         },
 
+        /**
+         * Resolve `@import` files paths
+         * @param {String} data sass code
+         * @param {String} filename current file path
+         * @return {String}
+         */
+        _resolveImports: function (data, filename) {
+            var that = this;
+            var fileRelativeUrl = this._resolveCssUrl(filename, filename);
+
+            data = data.replace(/@import\s*(?:url\()?["']?([^"'\)]+)["']?(?:\))?\s*;/g, function (s, url) {
+                var firstChar = url.charAt(0);
+                if (firstChar === '\'' || firstChar === '"') {
+                    url = url.substr(1, url.length - 2);
+                }
+
+                return '@import "' + that._resolveCssUrl(url, filename) + '";';
+            });
+
+            return data;
+        },
+
+        /**
+         * Resolve file path for url
+         * @param {String} url resolve this path
+         * @param {String} filename resolve from this filepath
+         * @return {String}
+         * @private
+         */
         _resolveCssUrl: function (url, filename) {
             return this._getCssPreprocessor()._resolveCssUrl(url, filename);
         },
 
+        /**
+         * Getting CSSPreprocessor from `css` tech`
+         * @returns {Object}
+         * @private
+         */
         _getCssPreprocessor: function () {
             var _this = this;
             var preprocessCss = new CssPreprocessor();
