@@ -38,8 +38,10 @@ module.exports = require('enb/lib/build-flow').create()
             return vowFs.read(filename, 'utf8')
                 .then(function (data) {
                     data = _this._processUrls(data, filename);
+                    data = _this._resolveImports(data, filename);
+                    data = _this._processIncludes(data, filename);
 
-                    return _this._processIncludes(data, filename);
+                    return data;
                 });
         });
 
