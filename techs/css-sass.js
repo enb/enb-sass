@@ -119,11 +119,9 @@ module.exports = require('enb/lib/build-flow').create()
             var fileRelativeUrl = this._resolveCssUrl(filename, filename);
 
             return this._getCssPreprocessor()._processIncludes(data, filename).then(function (data) {
-                return [
-                    '/* ' + fileRelativeUrl + ': begin */',
-                    data,
-                    '/* ' + fileRelativeUrl + ': end */'
-                ].join("\n");
+                return '/* ' + fileRelativeUrl + ': begin */' +
+                       '\n'  + data + '\n' +
+                       '/* ' + fileRelativeUrl + ': end */\n';
             });
         },
 
