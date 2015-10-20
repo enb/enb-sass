@@ -30,7 +30,7 @@
     ],
     "dependencies" : {
         "enb": "0.15.0",
-        "node-sass": "3.2.0",
+        "node-sass": "3.3.3",
         "vow": "0.4.9",
         "inherit": "2.2.2"
     },
