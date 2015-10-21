@@ -93,7 +93,7 @@ module.exports = require('enb/lib/build-flow').create()
                 }
             }.bind(this))
             .fail(function (ex) {
-                ex = err instanceof Error ? ex : JSON.parse(ex);
+                ex = ex instanceof Error ? ex : JSON.parse(ex);
                 deferred.reject(ex);
             });
 
