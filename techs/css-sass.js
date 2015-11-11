@@ -5,6 +5,9 @@ var CssPreprocessor = require('enb/lib/preprocess/css-preprocessor');
 var vowFs = require('enb/lib/fs/async-fs');
 var path = require('path');
 var util = require('util');
+var Logger = require('enb/lib/logger');
+
+Logger = new Logger();
 
 module.exports = require('enb/lib/build-flow').create()
     .name('enb-sass')
@@ -51,6 +54,11 @@ module.exports = require('enb/lib/build-flow').create()
 
                 var successCb = sassSettings.success instanceof Function ? sassSettings.success : function () {};
 
+                if (sassSettings.data.length == 0) {
+                    Logger.log('[enb-sass]: empty string given.');
+                    deferred.resolve('');
+                }
+
                 // In some cases `renderSync` does not give the data in the handler, so we use a try...catch
                 try {
                     var cssResult = sass.renderSync(sassSettings).css;
@@ -85,7 +93,7 @@ module.exports = require('enb/lib/build-flow').create()
                     );
 
                     if (errorLogging.enabled) {
-                        console.error(formattedError);
+                        Logger.log(formattedError);
                     }
 
                     deferred.reject(formattedError);
