@@ -1,7 +1,6 @@
-var sass = require('node-sass');
+var sass = require('sass');
 var Vow = require('vow');
-var inherit = require('inherit');
-var CssPreprocessor = require('enb/lib/preprocess/css-preprocessor');
+var CssPreprocessor = require('enb-css-preprocessor');
 var vowFs = require('enb/lib/fs/async-fs');
 var path = require('path');
 var util = require('util');
@@ -17,10 +16,10 @@ module.exports = require('enb/lib/build-flow').create()
     .builder(function (sourceFiles) {
         var _this = this;
         var deferred = Vow.defer();
-        var sassSettings = inherit({
+        var sassSettings = {
             includePaths: [],
             data: ''
-        }, this._sass);
+        };
         var errorLogging = {
             enabled: true,
             offsetLines: 5
@@ -66,8 +65,7 @@ module.exports = require('enb/lib/build-flow').create()
                     deferred.resolve(cssResult);
                 } catch (ex) {
                     ex = ex instanceof Error ? ex : JSON.parse(ex);
-
-                    var lines = sassSettings.data.split('\n');
+                    var lines = sassSettings.data.split('\n') || [];
                     var errorCtx = lines.slice(ex.line - errorLogging.offsetLines, ex.line).concat(
                         '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
                         lines.slice(ex.line + 1, ex.line + errorLogging.offsetLines + 1)
