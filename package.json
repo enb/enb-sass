@@ -29,10 +29,10 @@
         }
     ],
     "dependencies": {
-        "enb": "^1.5.1",
-        "sass": "^1.49.8",
-        "vow": "^0.4.20",
-        "enb-css-preprocessor": "^1.0.0"
+        "enb": "1.5.1",
+        "enb-css-preprocessor": "1.0.0",
+        "sass": "1.49.8",
+        "vow": "0.4.20"
     },
     "engines": {
         "node": ">=0.10"

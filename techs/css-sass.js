@@ -11,14 +11,15 @@ Logger = new Logger();
 module.exports = require('enb/lib/build-flow').create()
     .name('enb-sass')
     .target('target', '?.css')
-    .defineOption('sass', {}) // https://github.com/sass/node-sass#options
+    .defineOption('sass', {}) // https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions
     .useFileList(['css', 'scss'])
     .builder(function (sourceFiles) {
         var _this = this;
         var deferred = Vow.defer();
         var sassSettings = {
             includePaths: [],
-            data: ''
+            data: '',
+            ..._this._options.sass
         };
         var errorLogging = {
             enabled: true,
@@ -65,7 +66,7 @@ module.exports = require('enb/lib/build-flow').create()
                     deferred.resolve(cssResult);
                 } catch (ex) {
                     ex = ex instanceof Error ? ex : JSON.parse(ex);
-                    var lines = sassSettings.data.split('\n') || [];
+                    var lines = sassSettings.data.split('\n');
                     var errorCtx = lines.slice(ex.line - errorLogging.offsetLines, ex.line).concat(
                         '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^',
                         lines.slice(ex.line + 1, ex.line + errorLogging.offsetLines + 1)
