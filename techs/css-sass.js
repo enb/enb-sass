@@ -11,14 +11,17 @@ Logger = new Logger();
 module.exports = require('enb/lib/build-flow').create()
     .name('enb-sass')
     .target('target', '?.css')
-    .defineOption('sass', {}) // https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions
+    // https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions
+    // https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions
+    // https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions
+    .defineOption('sass', {}) 
     .useFileList(['css', 'scss'])
     .builder(function (sourceFiles) {
         var _this = this;
         var deferred = Vow.defer();
         var sassSettings = {
             includePaths: [],
-            data: '',
+            data: '', 
             ..._this._options.sass
         };
         var errorLogging = {

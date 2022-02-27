@@ -15,7 +15,7 @@ npm install enb-sass --save
 * *String* **target** contains target file name. Default: `?.css`
 * *String* **filesTarget** contains file masks, according to which a list of source files is created. Default: `?.files`.
 * *Array* **sourceSuffixes** Files suffixes that will be used. Default: `css`
-* *Object* **sass** `node-sass` options. Read more: https://github.com/sass/node-sass#options. Default: default `node-sass` options.
+* *Object* **sass** `sass` options. Read more: [SharedOptions](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions), [FileOptions](https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions), [StringOptions](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions). Default: default `sass` options.
 
 
 ## Usage
@@ -39,7 +39,7 @@ nodeConfig.addTech([
 ]);
 ```
 
-#### Use `node-sass` [compression](https://github.com/sass/node-sass#outputstyle) and [debug mode](https://github.com/sass/node-sass#sourcecomments)
+#### Use `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions)
 
 ```javascript
 nodeConfig.addTech([
@@ -48,14 +48,13 @@ nodeConfig.addTech([
     target: '?.css',
     sourceSuffixes: ['scss'],
     sass: {
-      outputStyle: 'compressed',
-      sourceComments: true
+      outputStyle: 'compressed'
     }
   }
 ]);
 ```
 
-#### Collecting ie and ie8 css/scss files with `node-sass` [compression](https://github.com/sass/node-sass#outputstyle) and [debug mode](https://github.com/sass/node-sass#sourcecomments)
+#### Collecting ie and ie8 css/scss files with `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions)
 
 ```javascript
 nodeConfig.addTech([
@@ -64,8 +63,7 @@ nodeConfig.addTech([
     target: '?.css',
     sourceSuffixes: ['css', 'scss', 'ie.css', 'ie.scss', 'ie8.css', 'ie8.scss'],
     sass: {
-      outputStyle: 'compressed',
-      sourceComments: true
+      outputStyle: 'compressed'
     }
   }
 ]);
