@@ -39,7 +39,7 @@ nodeConfig.addTech([
 ]);
 ```
 
-#### Use `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions)
+#### Use `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions#outputStyle)
 
 ```javascript
 nodeConfig.addTech([
@@ -54,7 +54,7 @@ nodeConfig.addTech([
 ]);
 ```
 
-#### Collecting ie and ie8 css/scss files with `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions)
+#### Collecting ie and ie8 css/scss files with `sass` [compression](https://sass-lang.com/documentation/js-api/interfaces/LegacySharedOptions#outputStyle)
 
 ```javascript
 nodeConfig.addTech([
