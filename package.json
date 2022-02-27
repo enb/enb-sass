@@ -28,11 +28,11 @@
             "github-username": "ixax"
         }
     ],
-    "dependencies" : {
-        "enb": "0.15.0",
-        "node-sass": "3.3.3",
-        "vow": "0.4.9",
-        "inherit": "2.2.2"
+    "dependencies": {
+        "enb": "1.5.1",
+        "enb-css-preprocessor": "1.0.0",
+        "sass": "1.49.8",
+        "vow": "0.4.20"
     },
     "engines": {
         "node": ">=0.10"
